@@ -1,7 +1,6 @@
 <h1>ExpNo 1 :Developing AI Agent with PEAS Description</h1>
-<h3>Name: SURUTHI S </h3>
-<h3>Register Number : 212224220114 </h3>
-<h4>Date : 26/10/2026</h4>
+<h3>Name: SURUTHI S</h3>
+<h3>Register Number: 212224220114 </h3>
 
 
 <h3>AIM:</h3>
@@ -42,54 +41,49 @@
 <h3>STEP 5:</h3>
 <p>Measure the performance parameters: For each treatment performance incremented, for each movement performance decremented</p>
 
-## Programe
+# Programe :
+
 ```
 import random
-class MedicinePrescribingAgent:
-    def __init__(self):
-        self.rooms = {
-            "Room 1": random.uniform(97.0, 102.5),
-            "Room 2": random.uniform(97.0, 102.5)
-        }
-        self.performance = 0
-        self.current_room = random.choice(list(self.rooms.keys()))
-    def sense(self):
-        """Sense current room and patient's temperature."""
-        temperature = self.rooms[self.current_room]
-        print(f"\nAgent is in {self.current_room}")
-        print(f"Patient Temperature: {temperature:.1f}°F")
-        return temperature
-    def prescribe_medicine(self, temperature):
-        """Treat patient if temperature is above 98.5°F."""
-        if temperature > 98.5:
-            print("Patient has fever.")
-            print("Medicine Prescribed.")
-            self.performance += 1
-        else:
-            print("Patient is healthy.")
-            print("No medicine required.")
-    def move(self):
-        """Move to the other room."""
-        previous_room = self.current_room
-        self.current_room = "Room 2" if self.current_room == "Room 1" else "Room 1"
-        print(f"\nMoving from {previous_room} to {self.current_room}")
-        self.performance -= 1
-    def run(self):
-        print("=== Medicine Prescribing Agent ===")
-        temperature = self.sense()
-        self.prescribe_medicine(temperature)
-        self.move()
-        temperature = self.sense()
-        self.prescribe_medicine(temperature)
-        print("\nFinal Performance:", self.performance)
-agent = MedicinePrescribingAgent()
-agent.run()
+class MedicineAgent:
+def __init__(self):
+self.location = "Room A"
+self.performance = 0
+def act(self, environment):
+temp = environment[self.location]["temperature"]
+if temp > 98.5:
+print(f"Patient in {self.location} unhealthy ({temp:.1f}°F). Giving medicine.")
+self.performance += 10
+environment[self.location]["temperature"] = 98.0
+else:
+print(f"Patient in {self.location} healthy ({temp:.1f}°F).")
+self.location = "Room B" if self.location == "Room A" else "Room A"
+self.performance -= 1
+print(f"Moving to {self.location}. Performance: {self.performance}")
+print("-" * 30)
+def main():
+environment = {
+"Room A": {"temperature": random.uniform(97.0, 102.0)},
+"Room B": {"temperature": random.uniform(97.0, 102.0)}
+    }
+agent = MedicineAgent()
+print("Starting simulation.")
+print("-" * 30)
+for step in range(5):
+print(f"--- Step {step + 1} ---")
+agent.act(environment)
+random_room = random.choice(["Room A", "Room B"])
+environment[random_room]["temperature"] = random.uniform(99.0, 103.0)
+print("Simulation finished.")
+if __name__ == "__main__":
+main()
 
 ```
-## Output
 
-<img width="1410" height="682" alt="Screenshot 2026-10-15 103016" src="https://github.com/user-attachments/assets/3b89ce56-4aed-4f66-be1d-5d8d9560cc1d" />
+# Output:
 
+<img width="812" height="860" alt="image" src="https://github.com/user-attachments/assets/80f8c641-9b72-4f12-b67e-789f6c6111c9" />
 
-## Result
+# Result:
+
 Thus, the Medicine Prescribing AI Agent was successfully developed using the PEAS description to identify patients with fever, prescribe medicine, and calculate the performance measure based on treatment and movement.
